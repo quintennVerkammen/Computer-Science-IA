@@ -8,7 +8,7 @@ public class SqliteConnection {
 	private Connection conn;
 	
 	private Connection connect() {
-		String url = "jdbc:sqlite:C:\\Users\\quint\\eclipse-workspace\\IA.db";
+		String url = "jdbc:sqlite:IA.db";
 		Connection conn;
 		try {
 			conn = DriverManager.getConnection(url);
