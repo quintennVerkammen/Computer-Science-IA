@@ -5,7 +5,7 @@ import javax.swing.*;
 public class SqliteConnection {
 	private Admin curAdmin;
 	private Student curStudent;
-	public Connection conn;
+	private Connection conn;
 	
 	private Connection connect() {
 		String url = "jdbc:sqlite:C:\\Users\\quint\\eclipse-workspace\\IA.db";
