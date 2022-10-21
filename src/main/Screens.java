@@ -111,7 +111,7 @@ public class Screens {
 	}
 	
 	// Method used to display the starting screen
-	public void startScreen() {
+	private void startScreen() {
 
 		btnOldUser = new JButton("Existing User");
 		btnOldUser.setFont(new Font("Tahoma", Font.BOLD, 16));
