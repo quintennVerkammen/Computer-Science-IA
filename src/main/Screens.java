@@ -350,8 +350,8 @@ public class Screens {
 					JOptionPane.showMessageDialog(null, "Login Successful!");
 					clearLoginScreen();
 					adminHomeScreen();
-				}	// If an error has occured communicating with the database it is communicated to the user
-				else (!dbConnection.checkAdminLogin(usernameLoginField.getText(), pwordMain)) {
+				}	// If an error has occurred communicating with the database it is communicated to the user
+				else if (!dbConnection.checkAdminLogin(usernameLoginField.getText(), pwordMain)) {
 					JOptionPane.showMessageDialog(null, "An error has occured.");
 				}
 			}
@@ -830,9 +830,8 @@ public class Screens {
 		btnSaveStudentInfo.setBounds(256, 550, 275, 107);
 		btnSaveStudentInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				double average;
-			
 				// Tries to convert the text field into an number to verify whether it is a valid input
+				double average;
 				try {
 					average = Double.parseDouble(studentAverageEditField.getText());
 				} catch (NumberFormatException ex) {
@@ -841,7 +840,21 @@ public class Screens {
 					return;
 				}
 				
-				dbConnection.updateStudentData(studentNameEditField.getText(), studentAverageEditField.getText(), studentCommentEditField.getText());
+				if (average < 0 || average > 100) {
+					JOptionPane.showMessageDialog(null, "Please enter a valid percentage");
+				}
+				else if (studentNameEditField.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "Please enter a name");
+				}
+				else if (studentCommentEditField.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "Please enter a valid comment");
+				}
+				else {
+					dbConnection.getCurStudent().setName(studentNameEditField.getText());
+					dbConnection.getCurStudent().setAverage(average);
+					dbConnection.getCurStudent().setComment(studentCommentEditField.getText());
+					dbConnection.updateStudentData();
+				}
 			}
 		});
 		frame.getContentPane().add(btnSaveStudentInfo);
