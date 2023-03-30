@@ -111,7 +111,7 @@ public class Screens {
 	}
 	
 	// Method used to display the starting screen
-	private void startScreen() {
+	public void startScreen() {
 
 		btnOldUser = new JButton("Existing User");
 		btnOldUser.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -820,7 +820,7 @@ public class Screens {
 		txtComment.setBounds(256, 359, 136, 36);
 		frame.getContentPane().add(txtComment);
 		
-		studentCommentEditField = new JFormattedTextField();
+		studentCommentEditField = new JFormattedTextField(dbConnection.getCurStudent().getComment());
 		studentCommentEditField.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		studentCommentEditField.setBounds(436, 359, 383, 156);
 		frame.getContentPane().add(studentCommentEditField);
@@ -860,9 +860,12 @@ public class Screens {
 		btnGenerateComment = new JButton("Generate");
 		btnGenerateComment.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnGenerateComment.setBounds(436, 338, 118, 23);
-		btnGenerateComment.addActionListener(new ActionListener() {
+		btnGenerateComment.addActionListener(new ActionListener() {	
 			public void actionPerformed(ActionEvent e) {
-				
+				dbConnection.getCurStudent().generateComment();
+				studentCommentEditField = new JFormattedTextField(dbConnection.getCurStudent().getComment());
+				System.out.println("H");
+				frame.repaint();
 			}
 		});
 		frame.getContentPane().add(btnGenerateComment);
