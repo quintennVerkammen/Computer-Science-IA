@@ -342,17 +342,17 @@ public class Screens {
 			public void actionPerformed(ActionEvent e) {
 				char[] pw = passwordLoginField.getPassword();
 				String pwordMain = new String (pw);
-				
-				if (usernameLoginField.getText().equals("") || pwordMain.equals("")) {
+				// Validates that data was input correctly
+				if (usernameLoginField.getText().equals("") || pwordMain.equals("")) {	
 					JOptionPane.showMessageDialog(null, "Not all fields have been entered. Please try again.");
-				}
+				}	// Checks that data matches an entry of the database and logs in if so
 				else if (dbConnection.checkAdminLogin(usernameLoginField.getText(), pwordMain)) {
 					JOptionPane.showMessageDialog(null, "Login Successful!");
 					clearLoginScreen();
 					adminHomeScreen();
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "Username and password do not match. Please try again.");
+				}	// If an error has occured communicating with the database it is communicated to the user
+				else (!dbConnection.checkAdminLogin(usernameLoginField.getText(), pwordMain)) {
+					JOptionPane.showMessageDialog(null, "An error has occured.");
 				}
 			}
 		});
