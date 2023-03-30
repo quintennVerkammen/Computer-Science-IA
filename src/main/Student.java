@@ -20,6 +20,10 @@ public class Student {
 		return fullName;
 	}
 	
+	public void setName(String name) {
+		fullName = name;
+	}
+	
 	public String getClassName() {
 		return className;
 	}
@@ -32,6 +36,10 @@ public class Student {
 		return average;
 	}
 	
+	public void setAverage(double average) {
+		this.average = average;
+	}
+	
 	public void generateComment() {
 		comment = new Comment(average);
 	}
@@ -39,4 +47,9 @@ public class Student {
 	public String getComment() {
 		return fullName + comment.getComment();
 	}
+	
+	public void setComment(String comment) {
+		this.comment.setComment(comment);
+	}
 }
+
