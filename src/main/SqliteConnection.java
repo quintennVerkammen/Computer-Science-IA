@@ -143,14 +143,12 @@ public class SqliteConnection {
 		}
 	}
 	
-	public void updateStudentData(String studentName, String average, String comment) {
+	public void updateStudentData() {
 		try {
 			Statement stmt = (Statement) conn.createStatement();
-			stmt.executeUpdate("UPDATE Student SET FullName = '" + studentName + "', Average = '" + average + "', Comment = '" + comment + "' WHERE Teacher = '" + curAdmin.getFullName()+ "' AND ClassName = '" + curAdmin.getCurClassName() + "' AND FullName = '" + studentName + "'");
-			// setCurStudent(studentName);
+			stmt.executeUpdate("UPDATE Student SET FullName = '" + curStudent.getName() + "', Average = '" + curStudent.getAverage() + "', Comment = '" + curStudent.getComment() + "' WHERE Teacher = '" + curAdmin.getFullName()+ "' AND ClassName = '" + curAdmin.getCurClassName() + "' AND FullName = '" + curStudent.getName() + "'");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 }
- 
