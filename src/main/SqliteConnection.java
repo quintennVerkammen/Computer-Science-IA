@@ -38,18 +38,17 @@ public class SqliteConnection {
 	
 	public boolean checkAdminLogin(String username, String password) {
 		try {
-			Statement stmt = (Statement) conn.createStatement();
-			
-			String selectSql = "Select * from Admin";
-			ResultSet rs = stmt.executeQuery(selectSql);
-            while (rs.next()) {
+			Statement stmt = (Statement) conn.createStatement(); 	// Creates a statement for the query
+			String selectSql = "Select * from Admin";	// This query returns all elements in the Admin table of the database
+			ResultSet rs = stmt.executeQuery(selectSql);	// All Admin elements are returned in the form of a ResultSet
+            while (rs.next()) {	// Loops through the entire ResultSet to check if the input credentials fit any given entry
             	if (rs.getString("Username").equals(username) && rs.getString("Password").equals(password)) {
             		curAdmin = new Admin(rs.getString("FullName"));
             		return true;
             	}
             }
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException e) {	// If any error were to occur in the data retrieval process the error is 
+			e.printStackTrace();	// anticipated so that the program does not crash on the user
 			return false;
 		}
 		return false;
